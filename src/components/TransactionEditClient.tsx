@@ -37,8 +37,8 @@ export default function TransactionEditClient({ id }: { id: string }) {
       <TransactionForm
         initial={tx}
         submitLabel="Save"
-        onSubmit={(input) => {
-          update(id, input);
+        onSubmit={async (input) => {
+          await update(id, input);
           router.push(`/transactions/${id}`);
         }}
       />
