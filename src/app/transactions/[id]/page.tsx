@@ -1,5 +1,6 @@
 import TransactionDetailClient from "@/components/TransactionDetailClient";
 
-export default function Page({ params }: { params: { id: string } }) {
-  return <TransactionDetailClient id={params.id} />;
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <TransactionDetailClient id={id} />;
 }
