@@ -1,5 +1,6 @@
 import InsightsWeekClient from "@/components/InsightsWeekClient";
 
-export default function Page({ params }: { params: { weekStart: string } }) {
-  return <InsightsWeekClient weekStart={params.weekStart} />;
+export default async function Page({ params }: { params: Promise<{ weekStart: string }> }) {
+  const { weekStart } = await params;
+  return <InsightsWeekClient weekStart={weekStart} />;
 }
