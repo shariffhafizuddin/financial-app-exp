@@ -22,8 +22,8 @@ export default function TransactionNewClient() {
       </div>
       <TransactionForm
         submitLabel="Create"
-        onSubmit={(input) => {
-          const created = add(input);
+        onSubmit={async (input) => {
+          const created = await add(input);
           router.push(`/transactions/${created.id}`);
         }}
       />

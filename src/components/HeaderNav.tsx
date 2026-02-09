@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useVault } from "@/hooks/useVault";
 
 function extractWeekStart(pathname: string | null): string | null {
   if (!pathname) return null;
@@ -11,6 +12,7 @@ function extractWeekStart(pathname: string | null): string | null {
 
 export default function HeaderNav() {
   const pathname = usePathname();
+  const { isVaultEnabled, isLocked, lock } = useVault();
   const weekStart = extractWeekStart(pathname);
   const weekHref = weekStart ? `/week/${weekStart}` : "/";
   const insightsHref = weekStart ? `/insights/${weekStart}` : "/insights";
@@ -23,6 +25,17 @@ export default function HeaderNav() {
       <Link className="text-slate-600 hover:text-slate-900" href={insightsHref}>
         Insights
       </Link>
+      <Link className="text-slate-600 hover:text-slate-900" href="/settings">
+        Settings
+      </Link>
+      {isVaultEnabled && !isLocked && (
+        <button
+          onClick={lock}
+          className="text-slate-600 hover:text-slate-900"
+        >
+          Lock
+        </button>
+      )}
     </nav>
   );
 }

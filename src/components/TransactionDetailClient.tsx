@@ -41,10 +41,10 @@ export default function TransactionDetailClient({ id }: { id: string }) {
           <Button
             variant="danger"
             type="button"
-            onClick={() => {
+            onClick={async () => {
               const ok = window.confirm("Delete this transaction? This cannot be undone.");
               if (!ok) return;
-              const deleted = remove(id);
+              const deleted = await remove(id);
               router.push(deleted ? `/week/${weekStart}` : "/");
             }}
           >
